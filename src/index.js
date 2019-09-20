@@ -1,31 +1,31 @@
-import React, {PropTypes, Component} from 'react';
+import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 
 class App extends Component{
-    static propTypes ={
-        btnText: PropTypes.string.isRequired,
-        h1text: PropTypes.string.isRequired,
-        newArray: PropTypes.array.isRequired
-    };
-    static defaultProps ={
-        btnText: 'default props test'
-    };
-    bntOnClick(event) {
-        console.log('Button on click', event);
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            text: 'test'
+        }
+    }
+    inputOnChange(event){
+        console.log(event.target.value);
+        const text = event.target.value;
+        this.setState({ text });
     }
     render() {
-        console.log('array', this.props.newArray);
         return(
             <div className="test" >
-                <h1>{ this.props.h1text }</h1>
-                <h3>it's really works!!!!</h3>
-                <button onClick={this.bntOnClick}>{this.props.btnText || 'Default btn text'}</button>
+                <h1>Hellow</h1>
+                <input type="text" value={ this.state.text } onChange={this.inputOnChange.bind(this) } />
             </div>
 
         );
     }
 }
 ReactDom.render(
-    <App  h1text="this is h1 text" newArray={[1,2,3,4,5]}/>,
+    <App />,
     document.querySelector('#app')
 );
